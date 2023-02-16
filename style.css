@@ -90,6 +90,8 @@ h1 {
 
 .heroImage {
   content: url('images/image-hero-mobile.png');
+background-size: contain;
+width: 100%;
 }
 
 main {
@@ -399,7 +401,7 @@ main {
 
   position: absolute;
 
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 14px rgba(0,0,0,0.75);
 
 
   border-radius: 0.625rem;
@@ -513,6 +515,7 @@ main {
   .heroImage {
     content: url('images/image-hero-desktop.png');
     max-width: 30.125rem;
+
   }
 
   .logoLine {
