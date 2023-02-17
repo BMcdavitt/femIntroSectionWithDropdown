@@ -1,28 +1,3 @@
-const hamburger = document.getElementById('hamburger')
-const hamburgerClose = document.getElementById('hamburgerClose')
-const hamburgerMenu = document.getElementById('hamburgerMenu')
-const grayOut = document.getElementsByClassName('grayOut')[0]
-
-const hamburgerLineTop = document.getElementsByClassName('lineTop')[0]
-const hamburgerLineMiddle = document.getElementsByClassName('lineMiddle')[0]
-const hamburgerLineBottom = document.getElementsByClassName('lineBottom')[0]
-
-const featuresMenu = document.getElementById('featuresMenu')
-const featuresMenuContent = document.getElementById('featuresMenuContent')
-const featuresDropDownIcon = document.getElementById('featuresDropDownIcon')
-const companyMenu = document.getElementById('companyMenu')
-const companyMenuContent = document.getElementById('companyMenuContent')
-const companyDropDownIcon = document.getElementById('companyDropDownIcon')
-
-const desktopFeaturesMenu = document.getElementById('desktopFeaturesMenu')
-const desktopFeaturesDropdown = document.getElementById('desktopFeaturesDropdown')
-const desktopFeaturesDropdownIcon = document.getElementById('desktopFeaturesDropDownIcon')
-const desktopCompanyMenu = document.getElementById('desktopCompanyMenu')
-const desktopCompanyDropdown = document.getElementById('desktopCompanyDropdown')
-const desktopCompanyDropdownIcon = document.getElementById('desktopCompanyDropDownIcon')
-const transparantCover = document.getElementsByClassName('transparantCover')[0]
-
-const topOptionClass = document.getElementById('menuTopOption')
 
 let lastWidth = window.outerWidth
 
@@ -31,9 +6,7 @@ topOptionArray.push(document.getElementById('menuTopOption1'))
 topOptionArray.push(document.getElementById('menuTopOption2'))
 topOptionArray.push(document.getElementById('menuTopOption3'))
 topOptionArray.push(document.getElementById('menuTopOption4'))
-const topOption2 = document.getElementById('menuTopOption2')
-const topOption3 = document.getElementById('menuTopOption3')
-const topOption4 = document.getElementById('menuTopOption4')
+
 
 let subOptionArray = []
 subOptionArray[0] = { size: 4, elements: [] }
@@ -58,16 +31,6 @@ subOptionArray[1] = {
   ],
 }
 
-const topOption1SubOption1 = document.getElementById('menuSubOption1-1')
-const topOption1SubOption2 = document.getElementById('menuSubOption1-2')
-const topOption1SubOption3 = document.getElementById('menuSubOption1-3')
-const topOption1SubOption4 = document.getElementById('menuSubOption1-4')
-
-const topOption2SubOption1 = document.getElementById('menuSubOption2-1')
-const topOption2SubOption2 = document.getElementById('menuSubOption2-2')
-const topOption2SubOption3 = document.getElementById('menuSubOption2-3')
-
-const bottomOptions = document.getElementsByClassName('menuBottomOptions')[0]
 
 let optionTravel = 0
 let companySpecificTravel = 0
@@ -105,93 +68,105 @@ for (let x = 0; x < 2; x++) {
   }
 }
 
-hamburger.addEventListener('click', toggleMenu)
-hamburgerClose.addEventListener('click', toggleMenu)
-grayOut.addEventListener('click', toggleMenu)
+$('#hamburger').on('click', toggleMenu)
+$('#hamburgerClose').on('click', toggleMenu)
+$('.grayOut').on('click', toggleMenu)
+
 
 function toggleMenu() {
   if (menuActive) {
     setTimeout(() => {
-      hamburgerMenu.style.display = 'none'
-      grayOut.style.display = 'none'
+      $('#hamburgerMenu').css('display', 'none')
+      $('.grayOut').css('display', 'none')
     }, 1000)
 
-    hamburgerMenu.classList.add('hideMenu')
-    hamburgerMenu.classList.remove('drawMenu')
+    $('#hamburgerMenu').removeClass('drawMenu').addClass('hideMenu')
 
-    hamburgerLineTop.classList.remove('openMenuLineTop')
-    hamburgerLineMiddle.classList.remove('openMenuLineMid')
-    hamburgerLineBottom.classList.remove('openMenuLineBottom')
-
-    hamburgerLineTop.classList.add('closeMenuLineTop')
-    hamburgerLineMiddle.classList.add('closeMenuLineMid')
-    hamburgerLineBottom.classList.add('closeMenuLineBottom')
+    $('.lineTop').removeClass('openMenuLineTop').addClass('closeMenuLineTop')
+    $('.lineMiddle').removeClass('openMenuLineMid').addClass('closeMenuLineMid')
+    $('.lineBottom').removeClass('openMenuLineBottom').addClass('closeMenuLineBottom')
 
     menuControl(topOptionArray, 'closeTopOption', 'showTopOption')
 
     if (companySubMenuActive) toggleCompanyMenu('quick')
     if (featuresSubMenuActive) toggleFeaturesMenu('quick')
 
-    bottomOptions.classList.remove('fadeInBottomOptions')
-    bottomOptions.classList.add('fadeOutBottomOptions')
+    $('.menuBottomOptions').removeClass('fadeInBottomOptions').addClass('fadeOutBottomOptions')
   } else {
-    hamburgerMenu.style.display = 'block'
-    grayOut.style.display = 'block'
+    $('#hamburgerMenu').css('display', 'block')
+    $('.grayOut').css('display', 'block')
 
-    hamburgerMenu.classList.add('drawMenu')
-    hamburgerMenu.classList.remove('hideMenu')
+    $('#hamburgerMenu').removeClass('hideMenu').addClass('drawMenu')
 
-    hamburgerLineTop.classList.remove('closeMenuLineTop')
-    hamburgerLineMiddle.classList.remove('closeMenuLineMid')
-    hamburgerLineBottom.classList.remove('closeMenuLineBottom')
+    $('.lineTop').removeClass('closeMenuLineTop').addClass('openMenuLineTop')
+    $('.lineMiddle').removeClass('closeMenuLineMid').addClass('openMenuLineMid')
+    $('.lineBottom').removeClass('closeMenuLineBottom').addClass('openMenuLineBottom')
 
-    hamburgerLineTop.classList.add('openMenuLineTop')
-    hamburgerLineMiddle.classList.add('openMenuLineMid')
-    hamburgerLineBottom.classList.add('openMenuLineBottom')
+
 
     menuControl(topOptionArray, 'showTopOption', 'closeTopOption')
 
-    bottomOptions.classList.add('fadeInBottomOptions')
-    bottomOptions.classList.remove('fadeOutBottomOptions')
+    $('.menuBottomOptions').removeClass('fadeOutBottomOptions').addClass('fadeInBottomOptions')
   }
 
   menuActive = !menuActive
 }
 
-featuresMenu.addEventListener('click', toggleFeaturesMenu)
+$('#featuresMenu').on('click', toggleFeaturesMenu)
 
 function toggleFeaturesMenu(quick) {
   console.log('click')
   if (featuresSubMenuActive) {
-    featuresDropDownIcon.classList.remove('rollUpIconAnimateOpen')
-    featuresDropDownIcon.classList.add('rollUpIconAnimateClose')
+    $('#featuresDropDownIcon').removeClass('rollUpIconAnimateOpen').addClass('rollUpIconAnimateClose')
 
     setTimeout(
       () => {
-        optionTravel -= 200
-        companySpecificTravel -= 200
 
-        topOption2.style.cssText += `transition: transform 0.5s; transform: translate(0px,${companySpecificTravel}px);`
-        topOption3.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
-        topOption4.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
-        bottomOptions.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
+        companySpecificTravel -= 200
+        optionTravel -= 200
+
+        companySpecificTravelObject = {
+          'transition': 'transform 0.5s',
+          'transform': `translate(0px,${companySpecificTravel}px)`
+        }
+
+
+        travelObject = {
+          'transition': 'transform 0.5s',
+          'transform': `translate(0px,${optionTravel}px)`
+        }
+
+        $('#menuTopOption2').css(companySpecificTravelObject)
+        $('#menuTopOption3').css(travelObject)
+        $('#menuTopOption4').css(travelObject)
+        $('.menuBottomOptions').css(travelObject)
       },
       quick === 'quick' ? 1000 : 200
     )
 
     menuControl(subOptionArray[0].elements, 'closeTopOptionFast', 'showTopOptionFast')
   } else {
-    featuresMenuContent.style.display = 'block'
-    featuresDropDownIcon.classList.add('rollUpIconAnimateOpen')
-    featuresDropDownIcon.classList.remove('rollUpIconAnimateClose')
 
-    optionTravel += 200
+    $('#featuresDropDownIcon').removeClass('rollUpIconAnimateClose').addClass('rollUpIconAnimateOpen')
+
+
     companySpecificTravel += 200
+    optionTravel += 200
 
-    topOption2.style.cssText += `transition: transform 0.5s; transform: translate(0px,${companySpecificTravel}px);`
-    topOption3.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
-    topOption4.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
-    bottomOptions.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
+    companySpecificTravelObject = {
+      'transition': 'transform 0.5s',
+      'transform': `translate(0px,${companySpecificTravel}px)`
+    }
+
+    travelObject = {
+      'transition': 'transform 0.5s',
+      'transform': `translate(0px,${optionTravel}px)`
+    }
+
+    $('#menuTopOption2').css(companySpecificTravelObject)
+    $('#menuTopOption3').css(travelObject)
+    $('#menuTopOption4').css(travelObject)
+    $('.menuBottomOptions').css(travelObject)
 
     menuControl(subOptionArray[0].elements, 'showTopOptionFast', 'closeTopOptionFast')
   }
@@ -199,35 +174,42 @@ function toggleFeaturesMenu(quick) {
   featuresSubMenuActive = !featuresSubMenuActive
 }
 
-companyMenu.addEventListener('click', toggleCompanyMenu)
+$('#companyMenu').on('click', toggleCompanyMenu)
 
 function toggleCompanyMenu(quick) {
   console.log('company')
   if (companySubMenuActive) {
-    companyDropDownIcon.classList.remove('rollUpIconAnimateOpen')
-    companyDropDownIcon.classList.add('rollUpIconAnimateClose')
+    $('#companyDropDownIcon').removeClass('rollUpIconAnimateOpen').addClass('rollUpIconAnimateClose')
 
     setTimeout(
       () => {
         optionTravel -= 150
-        topOption3.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
-        topOption4.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
-        bottomOptions.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
+        travelObject = {
+          'transition': 'transform 0.5s',
+          'transform': `translate(0px,${optionTravel}px)`
+        }
+
+        $('#menuTopOption3').css(travelObject)
+        $('#menuTopOption4').css(travelObject)
+        $('.menuBottomOptions').css(travelObject)
       },
       quick === 'quick' ? 1000 : 200
     )
 
     menuControl(subOptionArray[1].elements, 'closeTopOptionFast', 'showTopOptionFast')
   } else {
-    companyMenuContent.style.display = 'block'
-    companyDropDownIcon.classList.add('rollUpIconAnimateOpen')
-    companyDropDownIcon.classList.remove('rollUpIconAnimateClose')
+    $('#companyDropDownIcon').removeClass('rollUpIconAnimateClose').addClass('rollUpIconAnimateOpen')
 
     optionTravel += 150
 
-    topOption3.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
-    topOption4.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
-    bottomOptions.style.cssText += `transition: transform 0.5s; transform: translate(0px,${optionTravel}px);`
+    travelObject = {
+      'transition': 'transform 0.5s',
+      'transform': `translate(0px,${optionTravel}px)`
+    }
+
+    $('#menuTopOption3').css(travelObject)
+    $('#menuTopOption4').css(travelObject)
+    $('.menuBottomOptions').css(travelObject)
 
     menuControl(subOptionArray[1].elements, 'showTopOptionFast', 'closeTopOptionFast')
   }
@@ -235,10 +217,11 @@ function toggleCompanyMenu(quick) {
   companySubMenuActive = !companySubMenuActive
 }
 
-desktopFeaturesMenu.addEventListener('click', toggleDesktopFeaturesDropdown)
-desktopCompanyMenu.addEventListener('click', toggleDesktopCompanyDropdown)
+$('#desktopFeaturesMenu').on('click', toggleDesktopFeaturesDropdown)
+$('#desktopCompanyMenu').on('click', toggleDesktopCompanyDropdown)
+$('.transparantCover').on('click', () => {
 
-transparantCover.addEventListener('click', () => {
+  console.log('hi')
   if (desktopFeaturesSubMenuActive) {
     toggleDesktopFeaturesDropdown()
   }
@@ -248,6 +231,7 @@ transparantCover.addEventListener('click', () => {
   }
 })
 
+
 function toggleDesktopFeaturesDropdown(force) {
   if (desktopCompanySubMenuActive) {
     toggleDesktopCompanyDropdown()
@@ -255,24 +239,20 @@ function toggleDesktopFeaturesDropdown(force) {
 
   if (desktopFeaturesSubMenuActive) {
     setTimeout(() => {
-      desktopFeaturesDropdown.style.display = 'none'
-      transparantCover.style.display = 'none'
+      $('#desktopFeaturesDropdown').css('display', 'none')
+      $('.transparantCover').css('display', 'none')
+
     }, 250)
 
-    desktopFeaturesDropdownIcon.classList.remove('rollUpIconAnimateOpen')
-    desktopFeaturesDropdownIcon.classList.add('rollUpIconAnimateClose')
+    $('#desktopFeaturesDropDownIcon').removeClass('rollUpIconAnimateOpen').addClass('rollUpIconAnimateClose')
+    $('#desktopFeaturesDropdown').removeClass('desktopExpandDropdown').addClass('desktopCollapseDropdown')
 
-    desktopFeaturesDropdown.classList.remove('desktopExpandDropdown')
-    desktopFeaturesDropdown.classList.add('desktopCollapseDropdown')
   } else {
-    desktopFeaturesDropdown.style.display = 'block'
-    transparantCover.style.display = 'block'
+    $('#desktopFeaturesDropdown').css('display', 'block')
+    $('.transparantCover').css('display', 'block')
 
-    desktopFeaturesDropdownIcon.classList.add('rollUpIconAnimateOpen')
-    desktopFeaturesDropdownIcon.classList.remove('rollUpIconAnimateClose')
-
-    desktopFeaturesDropdown.classList.add('desktopExpandDropdown')
-    desktopFeaturesDropdown.classList.remove('desktopCollapseDropdown')
+    $('#desktopFeaturesDropDownIcon').removeClass('rollUpIconAnimateClose').addClass('rollUpIconAnimateOpen')
+    $('#desktopFeaturesDropdown').removeClass('desktopCollapseDropdown').addClass('desktopExpandDropdown')
   }
 
   desktopFeaturesSubMenuActive = !desktopFeaturesSubMenuActive
@@ -286,23 +266,18 @@ function toggleDesktopCompanyDropdown() {
   if (desktopCompanySubMenuActive) {
     setTimeout(() => {
       desktopCompanyDropdown.style.display = 'none'
-      transparantCover.style.display = 'none'
+
+      $('.transparantCover').css('display', 'none')
     }, 250)
+    $('#desktopCompanyDropDownIcon').removeClass('rollUpIconAnimateOpen').addClass('rollUpIconAnimateClose')
+    $('#desktopCompanyDropdown').removeClass('desktopExpandDropdown').addClass('desktopCollapseDropdown')
 
-    desktopCompanyDropdownIcon.classList.remove('rollUpIconAnimateOpen')
-    desktopCompanyDropdownIcon.classList.add('rollUpIconAnimateClose')
-
-    desktopCompanyDropdown.classList.remove('desktopExpandDropdown')
-    desktopCompanyDropdown.classList.add('desktopCollapseDropdown')
   } else {
     desktopCompanyDropdown.style.display = 'block'
-    transparantCover.style.display = 'block'
+    $('.transparantCover').css('display', 'block')
 
-    desktopCompanyDropdownIcon.classList.add('rollUpIconAnimateOpen')
-    desktopCompanyDropdownIcon.classList.remove('rollUpIconAnimateClose')
-
-    desktopCompanyDropdown.classList.add('desktopExpandDropdown')
-    desktopCompanyDropdown.classList.remove('desktopCollapseDropdown')
+    $('#desktopCompanyDropDownIcon').removeClass('rollUpIconAnimateClose').addClass('rollUpIconAnimateOpen')
+    $('#desktopCompanyDropdown').removeClass('desktopCollapseDropdown').addClass('desktopExpandDropdown')
   }
 
   desktopCompanySubMenuActive = !desktopCompanySubMenuActive

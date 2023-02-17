@@ -299,7 +299,7 @@ main {
 }
 
 .menuSubOptions {
-  display: none;
+  /* display: none; */
   margin-left: 1.25rem;
 }
 
